@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 
 import App from "../../components/App";
 
@@ -17,6 +17,7 @@ const findByTestAttr = (wrapper, attr) => {
   return wrapper.find(`[data-test='${attr}']`);
 };
 
+// App component shallow render
 test("renders without error", () => {
   const wrapper = appShallowWrapper();
   const appComponent = findByTestAttr(wrapper, "component-app");
@@ -88,4 +89,37 @@ test("clicking app button decrements the counter display", () => {
 
   const countDisplay = findByTestAttr(wrapper, "count-display");
   expect(countDisplay.text()).toContain(counter - 1);
+});
+
+// *** Error Display ***
+
+test("renders an error display element if errorShown state is true", () => {
+  const errorShown = true;
+  const wrapper = appShallowWrapper(null, { errorShown });
+  const errorDisplay = findByTestAttr(wrapper, "error-display");
+
+  expect(errorDisplay.length).toBe(1);
+});
+
+test("error-display not rendered when initially rendered", () => {
+  const wrapper = appShallowWrapper();
+  const errorDisplay = findByTestAttr(wrapper, "error-display");
+
+  expect(errorDisplay.length).toBe(0);
+});
+
+test("error display is shown once user clicks decremenet button when counter is at 0", () => {
+  const counter = 0;
+  const errorShown = false;
+  const wrapper = appShallowWrapper(null, { counter, errorShown });
+
+  const decrementButton = findByTestAttr(wrapper, "decrement-button");
+  decrementButton.simulate("click");
+  wrapper.update();
+
+  const countDisplay = findByTestAttr(wrapper, "count-display");
+  const errorDisplay = findByTestAttr(wrapper, "error-display");
+
+  expect(countDisplay.text()).toContain(0);
+  expect(errorDisplay.length).toBe(1);
 });

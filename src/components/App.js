@@ -4,7 +4,33 @@ import "../styles/App.css";
 
 class App extends Component {
   state = {
-    counter: 0
+    counter: 0,
+    errorShown: false
+  };
+
+  onCounterChange = changeType => {
+    const { counter, errorShown } = this.state;
+
+    if (changeType === "decrement" && counter === 0 && errorShown === false) {
+      this.setState({ errorShown: true });
+      return;
+    } else if (changeType === "increment") {
+      this.setState({ counter: this.state.counter + 1 });
+      if (errorShown === true) this.setState({ errorShown: false });
+      return;
+    } else if (changeType === "decrement") {
+      this.setState({ counter: this.state.counter - 1 });
+      if (errorShown === true) this.setState({ errorShown: false });
+      return;
+    }
+  };
+
+  renderErrorDisplay = () => {
+    if (this.state.errorShown === false) {
+      return;
+    } else {
+      return <h3 data-test="error-display">The count cannot go below zero!</h3>;
+    }
   };
 
   render() {
@@ -16,9 +42,11 @@ class App extends Component {
           The counter is currently {this.state.counter}!
         </h2>
 
+        {this.renderErrorDisplay()}
+
         <button
           className="app-btn"
-          onClick={() => this.setState({ counter: this.state.counter + 1 })}
+          onClick={() => this.onCounterChange("increment")}
           data-test="increment-button"
         >
           Increment
@@ -26,13 +54,7 @@ class App extends Component {
 
         <button
           className="app-btn"
-          onClick={() => {
-            this.state.counter === 0
-              ? false
-              : this.setState({
-                  counter: this.state.counter - 1
-                });
-          }}
+          onClick={() => this.onCounterChange("decrement")}
           data-test="decrement-button"
         >
           Decrement
