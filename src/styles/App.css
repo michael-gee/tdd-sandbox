@@ -6,6 +6,7 @@ body {
 
 .app {
   color: red;
+  text-align: center;
 }
 
 .app-btn {
@@ -15,6 +16,6 @@ body {
   border-radius: 5px;
   padding: 15px 25px;
 }
-  .app-btn:hover {
-    cursor: pointer;
-  }
+.app-btn:hover {
+  cursor: pointer;
+}

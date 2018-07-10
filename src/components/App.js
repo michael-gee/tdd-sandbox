@@ -1,34 +1,45 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
 
-import { changeInitialState } from '../actions/initial-state-actions';
+import "../styles/App.css";
 
-import '../styles/App.css';
+class App extends Component {
+  state = {
+    counter: 0
+  };
 
-const App = (props) => {
-  const { initialStateMessage, changeInitialState } = props;
+  render() {
+    return (
+      <div className="app" data-test="component-app">
+        <h1>TDD SandBox</h1>
 
-  return (
-      <div className="app">
-        <h1>TDD Sandbox</h1>
-        <h2>{initialStateMessage}</h2>
+        <h2 data-test="count-display">
+          The counter is currently {this.state.counter}!
+        </h2>
 
-        <button className="app-btn" onClick={changeInitialState}>Change Initial State</button>
+        <button
+          className="app-btn"
+          onClick={() => this.setState({ counter: this.state.counter + 1 })}
+          data-test="increment-button"
+        >
+          Increment
+        </button>
+
+        <button
+          className="app-btn"
+          onClick={() => {
+            this.state.counter === 0
+              ? false
+              : this.setState({
+                  counter: this.state.counter - 1
+                });
+          }}
+          data-test="decrement-button"
+        >
+          Decrement
+        </button>
       </div>
     );
+  }
 }
 
-const mapStateToProps = ({initialState}) => {
-  return {
-    initialStateMessage: initialState.message
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    changeInitialState
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
