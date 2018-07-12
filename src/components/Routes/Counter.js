@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Button } from "reactstrap";
+
 import "../../styles/Counter.css";
 
 class Counter extends Component {
@@ -50,21 +52,21 @@ class Counter extends Component {
 
         {this.renderErrorDisplay()}
 
-        <button
+        <Button
           className="counter-btn"
           onClick={() => this.onCounterChange("increment")}
           data-test="increment-button"
         >
           Increment
-        </button>
+        </Button>
 
-        <button
+        <Button
           className="counter-btn"
           onClick={() => this.onCounterChange("decrement")}
           data-test="decrement-button"
         >
           Decrement
-        </button>
+        </Button>
       </div>
     );
   }

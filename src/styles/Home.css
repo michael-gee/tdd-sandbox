@@ -1,0 +1,15 @@
+.home-container {
+  text-align: center;
+  padding: 25px 0;
+}
+
+.home-btn {
+  background-color: #1e73be;
+  font-size: 2em;
+  padding: 5px 50px;
+  color: white;
+}
+.home-btn:hover {
+  background-color: black;
+  cursor: pointer;
+}

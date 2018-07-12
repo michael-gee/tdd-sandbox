@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Navbar, NavbarBrand, NavItem } from "reactstrap";
 
@@ -8,9 +9,11 @@ const Header = () => {
   return (
     <header data-test="header-container">
       <Navbar className="navbar-wrapper">
-        <NavbarBrand>TDD Sandbox</NavbarBrand>
-
-        <NavItem>Nav item</NavItem>
+        <NavbarBrand>
+          <Link to="/" id="navbar-title">
+            TDD Sandbox
+          </Link>
+        </NavbarBrand>
       </Navbar>
     </header>
   );
