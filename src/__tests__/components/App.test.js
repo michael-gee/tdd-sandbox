@@ -23,3 +23,10 @@ test("renders without error", () => {
   const appComponent = findByTestAttr(wrapper, "app-container");
   expect(appComponent.length).toBe(1);
 });
+
+test("includes a BrowserRouter (as Router) component from react-router-dom", () => {
+  const wrapper = appShallowWrapper();
+  const browserRouterComponent = findByTestAttr(wrapper, "browser-router");
+
+  expect(browserRouterComponent.length).toBe(1);
+});

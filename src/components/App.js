@@ -1,16 +1,24 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import Counter from "./Routes/Counter";
 import Header from "./Header";
 
 import "../styles/App.css";
 
 const App = () => {
   return (
-    <div data-test="app-container">
-      <Header />
+    <Router data-test="browser-router">
+      <div data-test="app-container">
+        <Header />
 
-      <h1>hello</h1>
-    </div>
+        <main>
+          <Switch>
+            <Route exact path="/" component={Counter} />
+          </Switch>
+        </main>
+      </div>
+    </Router>
   );
 };
 

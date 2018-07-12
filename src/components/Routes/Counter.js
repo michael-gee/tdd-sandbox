@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
-import Header from "./Header";
-
-import "../styles/Counter.css";
+import "../../styles/Counter.css";
 
 class Counter extends Component {
   state = {
@@ -44,8 +42,6 @@ class Counter extends Component {
   render() {
     return (
       <div className="counter-wrapper" data-test="counter-container">
-        <Header />
-
         <h1>TDD SandBox</h1>
 
         <h2 data-test="count-display">
