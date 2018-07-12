@@ -30,3 +30,10 @@ test("includes a BrowserRouter (as Router) component from react-router-dom", () 
 
   expect(browserRouterComponent.length).toBe(1);
 });
+
+test("includes a Error Route component as a fallback page for any invalid urls", () => {
+  const wrapper = appShallowWrapper();
+  const browserRouterComponent = findByTestAttr(wrapper, "error-route");
+
+  expect(browserRouterComponent.length).toBe(1);
+});
