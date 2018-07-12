@@ -5,12 +5,15 @@ body {
 }
 
 .app {
-  color: red;
   text-align: center;
 }
 
+.error-display {
+  color: red;
+}
+
 .app-btn {
-  background-color: red;
+  background-color: black;
   color: white;
   font-size: 22px;
   border-radius: 5px;

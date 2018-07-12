@@ -11,8 +11,10 @@ class App extends Component {
   onCounterChange = changeType => {
     const { counter, errorShown } = this.state;
 
-    if (changeType === "decrement" && counter === 0 && errorShown === false) {
-      this.setState({ errorShown: true });
+    if (changeType === "decrement" && counter === 0) {
+      if (errorShown === false) {
+        this.setState({ errorShown: true });
+      }
       return;
     } else if (changeType === "increment") {
       this.setState({ counter: this.state.counter + 1 });
@@ -29,7 +31,11 @@ class App extends Component {
     if (this.state.errorShown === false) {
       return;
     } else {
-      return <h3 data-test="error-display">The count cannot go below zero!</h3>;
+      return (
+        <h3 className="error-display" data-test="error-display">
+          *** The count cannot go below zero! ***
+        </h3>
+      );
     }
   };
 
