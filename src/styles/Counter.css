@@ -1,0 +1,18 @@
+.counter-wrapper {
+  text-align: center;
+}
+
+.error-display {
+  color: red;
+}
+
+.counter-btn {
+  background-color: black;
+  color: white;
+  font-size: 22px;
+  border-radius: 5px;
+  padding: 15px 25px;
+}
+.counter-btn:hover {
+  cursor: pointer;
+}
