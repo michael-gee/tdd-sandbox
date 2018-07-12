@@ -7,7 +7,7 @@ import Header from "./Header";
 
 import "../styles/App.css";
 
-const App = () => {
+const App = props => {
   return (
     <Router data-test="browser-router">
       <div data-test="app-container">
@@ -16,7 +16,10 @@ const App = () => {
         <main>
           <Switch>
             <Route exact path="/" component={Counter} />
-            <Route component={Error} data-test="error-route" />
+            <Route
+              render={() => <Error title="404 - URL Not Found" />}
+              data-test="error-route"
+            />
           </Switch>
         </main>
       </div>
