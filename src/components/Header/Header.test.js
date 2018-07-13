@@ -1,22 +1,21 @@
 import React from "react";
 import { shallow } from "enzyme";
-
 import Header from ".";
 
+import { findByTestAttr } from "../../testUtils";
+
 // Provides Shallow Wrapper to the app component
-const appShallowWrapper = (props = {}, state = null) => {
+const headerShallowWrapper = (props = {}, state = null) => {
   const wrapper = shallow(<Header {...props} />);
   if (state) wrapper.setState(state);
   return wrapper;
 };
 
-const findByTestAttr = (wrapper, attr) => {
-  return wrapper.find(`[data-test='${attr}']`);
-};
+describe("component/element rendering", () => {
+  it("header component renders without error", () => {
+    const wrapper = headerShallowWrapper();
+    const headerContainer = findByTestAttr(wrapper, "header-container");
 
-test("renders component without error", () => {
-  const wrapper = appShallowWrapper();
-  const headerContainer = findByTestAttr(wrapper, "header-container");
-
-  expect(headerContainer.length).toBe(1);
+    expect(headerContainer.length).toBe(1);
+  });
 });

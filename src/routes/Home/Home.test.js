@@ -1,22 +1,21 @@
 import React from "react";
 import { shallow } from "enzyme";
-
 import Home from ".";
 
+import { findByTestAttr } from "../../testUtils";
+
 // Provides Shallow Wrapper to the app component
-const appShallowWrapper = (props = {}, state = null) => {
+const homeShallowWrapper = (props = {}, state = null) => {
   const wrapper = shallow(<Home {...props} />);
   if (state) wrapper.setState(state);
   return wrapper;
 };
 
-const findByTestAttr = (wrapper, attr) => {
-  return wrapper.find(`[data-test='${attr}']`);
-};
+describe("component/element rendering", () => {
+  it("Home component renders without error", () => {
+    const wrapper = homeShallowWrapper();
+    const homeContainer = findByTestAttr(wrapper, "home-container");
 
-test("renders component without error", () => {
-  const wrapper = appShallowWrapper();
-  const homeContainer = findByTestAttr(wrapper, "home-container");
-
-  expect(homeContainer.length).toBe(1);
+    expect(homeContainer.length).toBe(1);
+  });
 });

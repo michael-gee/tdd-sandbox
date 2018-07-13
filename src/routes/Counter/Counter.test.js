@@ -1,149 +1,142 @@
 import React from "react";
 import { shallow } from "enzyme";
-
 import Counter from ".";
+
+import { findByTestAttr } from "../../testUtils";
 
 // *** FUNCTIONS ***
 
 // Provides Shallow Wrapper to the app component
-const appShallowWrapper = (props = {}, state = null) => {
+const counterShallowWrapper = (props = {}, state = null) => {
   const wrapper = shallow(<Counter {...props} />);
   if (state) wrapper.setState(state);
   return wrapper;
 };
 
-// Finds a single element in the App component by its data-test attribute
-const findByTestAttr = (wrapper, attr) => {
-  return wrapper.find(`[data-test='${attr}']`);
-};
+describe("component/element rendering", () => {
+  it("Counter component render", () => {
+    const wrapper = counterShallowWrapper();
+    const appComponent = findByTestAttr(wrapper, "counter-container");
 
-// App component shallow render
-test("renders without error", () => {
-  const wrapper = appShallowWrapper();
-  const appComponent = findByTestAttr(wrapper, "counter-container");
+    expect(appComponent.length).toBe(1);
+  });
 
-  expect(appComponent.length).toBe(1);
+  it("count-display render", () => {
+    const wrapper = counterShallowWrapper();
+    const countDisplay = findByTestAttr(wrapper, "count-display");
+
+    expect(countDisplay.length).toBe(1);
+  });
+
+  it("increment-button render", () => {
+    const wrapper = counterShallowWrapper();
+    const incrementButton = findByTestAttr(wrapper, "increment-button");
+
+    expect(incrementButton.length).toBe(1);
+  });
+
+  it("decrement-button render", () => {
+    const wrapper = counterShallowWrapper();
+    const decrementButton = findByTestAttr(wrapper, "decrement-button");
+
+    expect(decrementButton.length).toBe(1);
+  });
+
+  it("error-display not rendered when Counter initially rendered", () => {
+    const wrapper = counterShallowWrapper();
+    const errorDisplay = findByTestAttr(wrapper, "error-display");
+
+    expect(errorDisplay.length).toBe(0);
+  });
+
+  it("renders an error display element if errorShown state is true", () => {
+    const errorShown = true;
+    const wrapper = counterShallowWrapper(null, { errorShown });
+    const errorDisplay = findByTestAttr(wrapper, "error-display");
+
+    expect(errorDisplay.length).toBe(1);
+  });
+
+  // *** Error Display ***
+  test("error-display element is rendered once user clicks decremenet button when counter is at 0", () => {
+    const counter = 0;
+    const errorShown = false;
+    const wrapper = counterShallowWrapper(null, { counter, errorShown });
+
+    const decrementButton = findByTestAttr(wrapper, "decrement-button");
+    decrementButton.simulate("click");
+    wrapper.update();
+
+    const countDisplay = findByTestAttr(wrapper, "count-display");
+    const errorDisplay = findByTestAttr(wrapper, "error-display");
+
+    expect(countDisplay.text()).toContain(0);
+    expect(errorDisplay.length).toBe(1);
+  });
+
+  test("error-display element renders again once user clicks increment button when counter is at 0 and errorShown is true", () => {
+    const counter = 0;
+    const errorShown = true;
+    const wrapper = counterShallowWrapper(null, { counter, errorShown });
+
+    const decrementButton = findByTestAttr(wrapper, "increment-button");
+    decrementButton.simulate("click");
+    wrapper.update();
+
+    const countDisplay = findByTestAttr(wrapper, "count-display");
+    const errorDisplay = findByTestAttr(wrapper, "error-display");
+
+    expect(countDisplay.text()).toContain(1);
+    expect(errorDisplay.length).toBe(0);
+  });
 });
 
-// *** Count Display / State ***
+describe("component state config tests", () => {
+  it("counter in component state starts at 0", () => {
+    const wrapper = counterShallowWrapper();
+    const initialCounterState = wrapper.state("counter");
 
-test("renders a count display", () => {
-  const wrapper = appShallowWrapper();
-  const countDisplay = findByTestAttr(wrapper, "count-display");
+    expect(initialCounterState).toBe(0);
+  });
 
-  expect(countDisplay.length).toBe(1);
-});
+  it("counter can not go below 0", () => {
+    const counter = 0;
+    const wrapper = counterShallowWrapper(null, { counter });
 
-test("counter in component state starts at 0", () => {
-  const wrapper = appShallowWrapper();
-  const initialCounterState = wrapper.state("counter");
+    const decrementButton = findByTestAttr(wrapper, "decrement-button");
+    decrementButton.simulate("click");
+    wrapper.update();
 
-  expect(initialCounterState).toBe(0);
-});
+    const countDisplay = findByTestAttr(wrapper, "count-display");
 
-test("counter can not go below 0", () => {
-  const counter = 0;
-  const wrapper = appShallowWrapper(null, { counter });
+    expect(countDisplay.text()).toContain(counter);
+  });
 
-  const decrementButton = findByTestAttr(wrapper, "decrement-button");
-  decrementButton.simulate("click");
-  wrapper.update();
+  // *** Increment Btn ***
+  it("clicking app button increments the counter display", () => {
+    const counter = 10;
+    const wrapper = counterShallowWrapper(null, { counter });
 
-  const countDisplay = findByTestAttr(wrapper, "count-display");
+    const incrementButton = findByTestAttr(wrapper, "increment-button");
+    incrementButton.simulate("click");
+    wrapper.update();
 
-  expect(countDisplay.text()).toContain(counter);
-});
+    const countDisplay = findByTestAttr(wrapper, "count-display");
 
-// *** Increment Btn ***
+    expect(countDisplay.text()).toContain(counter + 1);
+  });
 
-test("renders an increment button", () => {
-  const wrapper = appShallowWrapper();
-  const incrementButton = findByTestAttr(wrapper, "increment-button");
+  // *** Decrement Btn ***
+  it("clicking app button decrements the counter display", () => {
+    const counter = 10;
+    const wrapper = counterShallowWrapper(null, { counter });
 
-  expect(incrementButton.length).toBe(1);
-});
+    const decrementButton = findByTestAttr(wrapper, "decrement-button");
+    decrementButton.simulate("click");
+    wrapper.update();
 
-test("clicking app button increments the counter display", () => {
-  const counter = 10;
-  const wrapper = appShallowWrapper(null, { counter });
+    const countDisplay = findByTestAttr(wrapper, "count-display");
 
-  const incrementButton = findByTestAttr(wrapper, "increment-button");
-  incrementButton.simulate("click");
-  wrapper.update();
-
-  const countDisplay = findByTestAttr(wrapper, "count-display");
-
-  expect(countDisplay.text()).toContain(counter + 1);
-});
-
-// *** Decrement Btn ***
-
-test("renders a decrement button", () => {
-  const wrapper = appShallowWrapper();
-
-  const decrementButton = findByTestAttr(wrapper, "decrement-button");
-
-  expect(decrementButton.length).toBe(1);
-});
-
-test("clicking app button decrements the counter display", () => {
-  const counter = 10;
-  const wrapper = appShallowWrapper(null, { counter });
-
-  const decrementButton = findByTestAttr(wrapper, "decrement-button");
-  decrementButton.simulate("click");
-  wrapper.update();
-
-  const countDisplay = findByTestAttr(wrapper, "count-display");
-
-  expect(countDisplay.text()).toContain(counter - 1);
-});
-
-// *** Error Display ***
-
-test("renders an error display element if errorShown state is true", () => {
-  const errorShown = true;
-  const wrapper = appShallowWrapper(null, { errorShown });
-  const errorDisplay = findByTestAttr(wrapper, "error-display");
-
-  expect(errorDisplay.length).toBe(1);
-});
-
-test("error-display not rendered when initially rendered", () => {
-  const wrapper = appShallowWrapper();
-  const errorDisplay = findByTestAttr(wrapper, "error-display");
-
-  expect(errorDisplay.length).toBe(0);
-});
-
-test("error display is shown once user clicks decremenet button when counter is at 0", () => {
-  const counter = 0;
-  const errorShown = false;
-  const wrapper = appShallowWrapper(null, { counter, errorShown });
-
-  const decrementButton = findByTestAttr(wrapper, "decrement-button");
-  decrementButton.simulate("click");
-  wrapper.update();
-
-  const countDisplay = findByTestAttr(wrapper, "count-display");
-  const errorDisplay = findByTestAttr(wrapper, "error-display");
-
-  expect(countDisplay.text()).toContain(0);
-  expect(errorDisplay.length).toBe(1);
-});
-
-test("error display is hidden again once user clicks increment button when counter is at 0 and errorShown is true", () => {
-  const counter = 0;
-  const errorShown = true;
-  const wrapper = appShallowWrapper(null, { counter, errorShown });
-
-  const decrementButton = findByTestAttr(wrapper, "increment-button");
-  decrementButton.simulate("click");
-  wrapper.update();
-
-  const countDisplay = findByTestAttr(wrapper, "count-display");
-  const errorDisplay = findByTestAttr(wrapper, "error-display");
-
-  expect(countDisplay.text()).toContain(1);
-  expect(errorDisplay.length).toBe(0);
+    expect(countDisplay.text()).toContain(counter - 1);
+  });
 });
