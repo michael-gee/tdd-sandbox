@@ -131,3 +131,19 @@ test("error display is shown once user clicks decremenet button when counter is 
   expect(countDisplay.text()).toContain(0);
   expect(errorDisplay.length).toBe(1);
 });
+
+test("error display is hidden again once user clicks increment button when counter is at 0 and errorShown is true", () => {
+  const counter = 0;
+  const errorShown = true;
+  const wrapper = appShallowWrapper(null, { counter, errorShown });
+
+  const decrementButton = findByTestAttr(wrapper, "increment-button");
+  decrementButton.simulate("click");
+  wrapper.update();
+
+  const countDisplay = findByTestAttr(wrapper, "count-display");
+  const errorDisplay = findByTestAttr(wrapper, "error-display");
+
+  expect(countDisplay.text()).toContain(1);
+  expect(errorDisplay.length).toBe(0);
+});

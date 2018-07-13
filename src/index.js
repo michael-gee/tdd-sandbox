@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import App from "./components/App";
 
-import store from "./store";
+import store from "./redux/store";
 
 // import registerServiceWorker from './registerServiceWorker';
 

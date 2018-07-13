@@ -7,8 +7,8 @@ import "./Home.css";
 
 const Home = props => {
   return (
-    <div className="home-container" data-test="home-container">
-      <h1>Routes:</h1>
+    <div id="home-container" data-test="home-container">
+      <h1 id="home-title">TDD SandBox</h1>
 
       <Link to="/counter">
         <Button className="home-btn">Counter</Button>

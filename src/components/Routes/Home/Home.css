@@ -1,6 +1,10 @@
-.home-container {
+#home-container {
   text-align: center;
   padding: 25px 0;
+}
+
+#home-title {
+  padding-bottom: 25px;
 }
 
 .home-btn {
@@ -12,10 +16,4 @@
 .home-btn:hover {
   background-color: black;
   cursor: pointer;
-}
-
-@media screen and (max-width: var(--ipad-brakpoint)) {
-  .home-container {
-    background-color: red;
-  }
 }
