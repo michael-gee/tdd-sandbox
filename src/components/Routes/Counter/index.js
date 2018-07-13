@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Button } from "reactstrap";
 
-import "../../styles/Counter.css";
+import "./Counter.css";
 
 class Counter extends Component {
   state = {

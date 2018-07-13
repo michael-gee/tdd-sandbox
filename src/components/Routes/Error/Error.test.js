@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import Error from "../../components/Routes/Error";
+import Error from ".";
 
 // Provides Shallow Wrapper to the app component
 const appShallowWrapper = (props = {}, state = null) => {

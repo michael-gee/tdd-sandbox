@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import Counter from "../../components/Routes/Counter";
+import Counter from ".";
 
 // *** FUNCTIONS ***
 
@@ -21,6 +21,7 @@ const findByTestAttr = (wrapper, attr) => {
 test("renders without error", () => {
   const wrapper = appShallowWrapper();
   const appComponent = findByTestAttr(wrapper, "counter-container");
+
   expect(appComponent.length).toBe(1);
 });
 
@@ -29,12 +30,14 @@ test("renders without error", () => {
 test("renders a count display", () => {
   const wrapper = appShallowWrapper();
   const countDisplay = findByTestAttr(wrapper, "count-display");
+
   expect(countDisplay.length).toBe(1);
 });
 
 test("counter in component state starts at 0", () => {
   const wrapper = appShallowWrapper();
   const initialCounterState = wrapper.state("counter");
+
   expect(initialCounterState).toBe(0);
 });
 
@@ -47,6 +50,7 @@ test("counter can not go below 0", () => {
   wrapper.update();
 
   const countDisplay = findByTestAttr(wrapper, "count-display");
+
   expect(countDisplay.text()).toContain(counter);
 });
 
@@ -55,6 +59,7 @@ test("counter can not go below 0", () => {
 test("renders an increment button", () => {
   const wrapper = appShallowWrapper();
   const incrementButton = findByTestAttr(wrapper, "increment-button");
+
   expect(incrementButton.length).toBe(1);
 });
 
@@ -67,6 +72,7 @@ test("clicking app button increments the counter display", () => {
   wrapper.update();
 
   const countDisplay = findByTestAttr(wrapper, "count-display");
+
   expect(countDisplay.text()).toContain(counter + 1);
 });
 
@@ -76,6 +82,7 @@ test("renders a decrement button", () => {
   const wrapper = appShallowWrapper();
 
   const decrementButton = findByTestAttr(wrapper, "decrement-button");
+
   expect(decrementButton.length).toBe(1);
 });
 
@@ -88,6 +95,7 @@ test("clicking app button decrements the counter display", () => {
   wrapper.update();
 
   const countDisplay = findByTestAttr(wrapper, "count-display");
+
   expect(countDisplay.text()).toContain(counter - 1);
 });
 

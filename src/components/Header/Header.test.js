@@ -1,11 +1,11 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import Home from "../../components/Routes/Home";
+import Header from ".";
 
 // Provides Shallow Wrapper to the app component
 const appShallowWrapper = (props = {}, state = null) => {
-  const wrapper = shallow(<Home {...props} />);
+  const wrapper = shallow(<Header {...props} />);
   if (state) wrapper.setState(state);
   return wrapper;
 };
@@ -16,7 +16,7 @@ const findByTestAttr = (wrapper, attr) => {
 
 test("renders component without error", () => {
   const wrapper = appShallowWrapper();
-  const homeContainer = findByTestAttr(wrapper, "home-container");
+  const headerContainer = findByTestAttr(wrapper, "header-container");
 
-  expect(homeContainer.length).toBe(1);
+  expect(headerContainer.length).toBe(1);
 });

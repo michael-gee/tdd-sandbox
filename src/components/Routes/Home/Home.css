@@ -13,3 +13,9 @@
   background-color: black;
   cursor: pointer;
 }
+
+@media screen and (max-width: var(--ipad-brakpoint)) {
+  .home-container {
+    background-color: red;
+  }
+}

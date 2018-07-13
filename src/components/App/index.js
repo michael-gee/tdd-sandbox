@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Home from "./Routes/Home";
-import Counter from "./Routes/Counter";
-import Error from "./Routes/Error";
+import Home from "../Routes/Home";
+import Counter from "../Routes/Counter";
+import Error from "../Routes/Error";
 
-import Header from "./Header";
+import Header from "../Header";
 
-import "../styles/App.css";
+import "./App.css";
 
 const App = props => {
   return (

@@ -1,0 +1,16 @@
+:root {
+  /* colors */
+  --primary-color: #1e73be;
+  --seconday-color: #f13608;
+  --error-color: red;
+
+  /* font sizes */
+  --text-font: 1.6em;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 62.5%;
+}

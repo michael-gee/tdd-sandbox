@@ -4,13 +4,13 @@
 }
 
 .error-display {
-  color: red;
+  color: var(--error-color);
 }
 
 .counter-btn {
   background-color: black;
   color: white;
-  font-size: 22px;
+  font-size: 2.2em;
   border-radius: 5px;
   padding: 15px 25px;
   margin: 15px;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Button } from "reactstrap";
 
-import "../../styles/Home.css";
+import "./Home.css";
 
 const Home = props => {
   return (

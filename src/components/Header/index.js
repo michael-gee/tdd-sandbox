@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Navbar, NavbarBrand, NavItem } from "reactstrap";
 
-import "../styles/Header.css";
+import "./Header.css";
 
 const Header = () => {
   return (
