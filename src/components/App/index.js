@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Home from "../Routes/Home";
-import Counter from "../Routes/Counter";
-import Error from "../Routes/Error";
+import Home from "../../routes/Home";
+import Counter from "../../routes/Counter";
+import Error from "../../routes/Error";
 
 import Header from "../Header";
 
