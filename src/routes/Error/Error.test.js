@@ -4,7 +4,6 @@ import Error from ".";
 
 import { findByTestAttr } from "../../testUtils";
 
-// Provides Shallow Wrapper to the app component
 const errorShallowWrapper = (props = {}, state = null) => {
   const wrapper = shallow(<Error {...props} />);
   if (state) wrapper.setState(state);

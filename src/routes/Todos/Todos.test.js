@@ -4,7 +4,6 @@ import Todos from ".";
 
 import { findByTestAttr } from "../../testUtils";
 
-// Provides Shallow Wrapper to the app component
 const todosShallowWrapper = (props = {}, state = null) => {
   const wrapper = shallow(<Todos {...props} />);
   if (state) wrapper.setState(state);

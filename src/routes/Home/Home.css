@@ -3,14 +3,12 @@
   padding: 25px 0;
 }
 
-#home-title {
-  padding-bottom: 25px;
-}
-
 .home-btn {
+  display: flex;
   background-color: #1e73be;
   font-size: 2em;
   padding: 5px 50px;
+  margin: 25px auto;
   color: white;
 }
 .home-btn:hover {

@@ -44,6 +44,8 @@ class Counter extends Component {
   render() {
     return (
       <div className="counter-wrapper" data-test="counter-container">
+        <h1>Counter</h1>
+
         <h2 data-test="count-display">
           The counter is currently {this.state.counter}!
         </h2>

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Home from "../../routes/Home";
 import Counter from "../../routes/Counter";
+import Todos from "../../routes/Todos";
 import Error from "../../routes/Error";
 
 import Header from "../Header";
@@ -19,6 +20,7 @@ const App = props => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/counter" component={Counter} />
+            <Route path="/todos" component={Todos} />
             <Route
               render={() => <Error title="404 - URL Not Found" />}
               data-test="error-route"

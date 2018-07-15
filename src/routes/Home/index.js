@@ -13,6 +13,10 @@ const Home = props => {
       <Link to="/counter">
         <Button className="home-btn">Counter</Button>
       </Link>
+
+      <Link to="/todos">
+        <Button className="home-btn">Todos</Button>
+      </Link>
     </div>
   );
 };

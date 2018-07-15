@@ -4,7 +4,6 @@ import Home from ".";
 
 import { findByTestAttr } from "../../testUtils";
 
-// Provides Shallow Wrapper to the app component
 const homeShallowWrapper = (props = {}, state = null) => {
   const wrapper = shallow(<Home {...props} />);
   if (state) wrapper.setState(state);

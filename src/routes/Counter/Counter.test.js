@@ -6,7 +6,6 @@ import { findByTestAttr } from "../../testUtils";
 
 // *** FUNCTIONS ***
 
-// Provides Shallow Wrapper to the app component
 const counterShallowWrapper = (props = {}, state = null) => {
   const wrapper = shallow(<Counter {...props} />);
   if (state) wrapper.setState(state);
@@ -58,7 +57,7 @@ describe("component/element rendering", () => {
   });
 
   // *** Error Display ***
-  test("error-display element is rendered once user clicks decremenet button when counter is at 0", () => {
+  it("error-display element is rendered once user clicks decremenet button when counter is at 0", () => {
     const counter = 0;
     const errorShown = false;
     const wrapper = counterShallowWrapper(null, { counter, errorShown });
@@ -74,7 +73,7 @@ describe("component/element rendering", () => {
     expect(errorDisplay.length).toBe(1);
   });
 
-  test("error-display element renders again once user clicks increment button when counter is at 0 and errorShown is true", () => {
+  it("error-display element renders again once user clicks increment button when counter is at 0 and errorShown is true", () => {
     const counter = 0;
     const errorShown = true;
     const wrapper = counterShallowWrapper(null, { counter, errorShown });
