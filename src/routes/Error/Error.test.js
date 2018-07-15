@@ -31,9 +31,7 @@ describe("component/element rendering", () => {
 
 describe("prop config tests", () => {
   it("does not throw warning with expected props", () => {
-    const expectedProps = { title: "title prop passed to component!" };
-
-    checkProps(Error, expectedProps);
+    checkProps(Error, defaultProps);
   });
 
   it("renders title from title prop", () => {
