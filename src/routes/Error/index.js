@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import "./Error.css";
@@ -15,6 +16,10 @@ const Error = props => {
       </div>
     </div>
   );
+};
+
+Error.propTypes = {
+  title: PropTypes.string.isRequired
 };
 
 export default Error;

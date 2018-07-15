@@ -2,12 +2,15 @@ import React from "react";
 import { shallow } from "enzyme";
 import Error from ".";
 
-import { findByTestAttr } from "../../testUtils";
+import { findByTestAttr, checkProps } from "../../testUtils";
 
-const errorShallowWrapper = (props = {}, state = null) => {
-  const wrapper = shallow(<Error {...props} />);
-  if (state) wrapper.setState(state);
-  return wrapper;
+const defaultProps = {
+  title: "title prop passed to Error component"
+};
+
+const errorShallowWrapper = (props = {}) => {
+  const componentProps = { ...defaultProps, ...props };
+  return shallow(<Error {...componentProps} />);
 };
 
 describe("component/element rendering", () => {
@@ -27,6 +30,12 @@ describe("component/element rendering", () => {
 });
 
 describe("prop config tests", () => {
+  it("does not throw warning with expected props", () => {
+    const expectedProps = { title: "title prop passed to component!" };
+
+    checkProps(Error, expectedProps);
+  });
+
   it("renders title from title prop", () => {
     const title = "This is the Error Title Prop!";
     const wrapper = errorShallowWrapper({ title });

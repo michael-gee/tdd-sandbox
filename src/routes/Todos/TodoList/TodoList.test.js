@@ -2,10 +2,15 @@ import React from "react";
 import { shallow } from "enzyme";
 import TodoList from ".";
 
-import { findByTestAttr } from "../../../testUtils";
+import { findByTestAttr, checkProps } from "../../../testUtils";
+
+const defaultProps = {
+  todos: ["This is a todo!"]
+};
 
 const todoListShallowWrapper = (props = {}) => {
-  return shallow(<TodoList {...props} />);
+  const componentProps = { ...defaultProps, ...props };
+  return shallow(<TodoList {...componentProps} />);
 };
 
 describe("component/element rendering", () => {
@@ -14,5 +19,13 @@ describe("component/element rendering", () => {
     const todoListContainer = findByTestAttr(wrapper, "todoList-container");
 
     expect(todoListContainer.length).toBe(1);
+  });
+});
+
+describe("props config", () => {
+  it("does not throw warning with expected props", () => {
+    const expectedProps = { todos: [] };
+
+    checkProps(TodoList, expectedProps);
   });
 });
