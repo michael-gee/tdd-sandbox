@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import TodoList from ".";
+import TodoList from "./";
 
 import { findByTestAttr, checkProps } from "../../../testUtils";
 
@@ -13,14 +13,14 @@ const defaultProps = {
   }
 };
 
-const todoListShallowWrapper = (props = {}) => {
+const setup = (props = {}) => {
   const componentProps = { ...defaultProps, ...props };
   return shallow(<TodoList {...componentProps} />);
 };
 
 describe("component/element rendering", () => {
   it("TodoList component renders without error", () => {
-    const wrapper = todoListShallowWrapper();
+    const wrapper = setup();
     const todoListContainer = findByTestAttr(wrapper, "todoList-container");
 
     expect(todoListContainer.length).toBe(1);
@@ -30,7 +30,7 @@ describe("component/element rendering", () => {
     const todos = {};
     const displayMessage =
       "Currently there are 0 to dos. Type in a to do in the input field provided to get started!";
-    const wrapper = todoListShallowWrapper({ todos });
+    const wrapper = setup({ todos });
     const todoListDislayContainer = findByTestAttr(
       wrapper,
       "no-todos-display-message"
@@ -41,7 +41,7 @@ describe("component/element rendering", () => {
   });
 
   it("renders todos-list if todos Object.keys().length > 1", () => {
-    const wrapper = todoListShallowWrapper();
+    const wrapper = setup();
     const todosListUL = findByTestAttr(wrapper, "todos-list");
 
     expect(todosListUL.length).toBe(1);
