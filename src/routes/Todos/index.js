@@ -15,8 +15,8 @@ export class Todos extends Component {
       <div id="todos-container" data-test="todos-container">
         <h1>Todos</h1>
         <h2>{todosCount}</h2>
-        <TodoInput />
-        <TodoList todos={todos} />
+        <TodoInput data-test="todo-input-component" />
+        <TodoList todos={todos} data-test="todo-list-component" />
       </div>
     );
   }

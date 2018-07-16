@@ -1,6 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { Todos } from "./";
+import TodoInput from "./TodoInput";
+import TodoList from "./TodoList";
 
 import { findByTestAttr, checkProps } from "../../testUtils";
 
@@ -35,6 +37,18 @@ describe("component/element shallow rendering", () => {
     const todosComponent = findByTestAttr(wrapper, "todos-container");
 
     expect(todosComponent.length).toBe(1);
+  });
+
+  it("renders a TodoInput child component", () => {
+    const todoInputComponent = findByTestAttr(wrapper, "todo-input-component");
+
+    expect(todoInputComponent.type()).toBe(TodoInput);
+  });
+
+  it("renders a TodoList child component", () => {
+    const todoListComponent = findByTestAttr(wrapper, "todo-list-component");
+
+    expect(todoListComponent.type()).toBe(TodoList);
   });
 });
 

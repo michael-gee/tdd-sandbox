@@ -1,0 +1,16 @@
+#todo-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin: 0 auto;
+  padding: 25px 0;
+  font-size: 1.6em;
+}
+
+#todo-input {
+  margin-bottom: 25px;
+}
+
+#todo-submit-btn {
+  background-color: green;
+}
