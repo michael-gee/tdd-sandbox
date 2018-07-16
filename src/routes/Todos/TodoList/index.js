@@ -4,21 +4,7 @@ import PropTypes from "prop-types";
 import "./TodoList.css";
 
 function renderTodos(todos) {
-  function renderItems(todosObj) {
-    for (let property in todosObj) {
-      return (
-        <li
-          id={todosObj[property].id}
-          className="list-item"
-          key={todosObj[property].id}
-        >
-          {todosObj[property].message}
-        </li>
-      );
-    }
-  }
-
-  if (Object.keys(todos).length === 0) {
+  if (todos.length === 0) {
     return (
       <div id="no-todos-display" data-test="no-todos-display-message">
         Currently there are 0 to dos. Type in a to do in the input field
@@ -28,7 +14,13 @@ function renderTodos(todos) {
   } else {
     return (
       <ul id="todos-list" data-test="todos-list">
-        {renderItems(todos)}
+        {todos.map(item => {
+          return (
+            <li className="list-item" key={item.id}>
+              {item.message}
+            </li>
+          );
+        })}
       </ul>
     );
   }
@@ -41,7 +33,7 @@ const TodoList = props => {
 };
 
 TodoList.propTypes = {
-  todos: PropTypes.objectOf(
+  todos: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       message: PropTypes.string.isRequired

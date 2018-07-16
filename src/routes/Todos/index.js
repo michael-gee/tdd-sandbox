@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import TodoInput from "./TodoInput";
@@ -20,6 +21,16 @@ export class Todos extends Component {
     );
   }
 }
+
+Todos.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      message: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  todosCount: PropTypes.number.isRequired
+};
 
 const mapStateToProps = ({ todos, todosCount }) => {
   return {

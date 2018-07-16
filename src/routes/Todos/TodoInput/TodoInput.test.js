@@ -4,13 +4,13 @@ import TodoInput from "./";
 
 import { findByTestAttr } from "../../../testUtils";
 
-const setup = (props = {}) => {
+const todoInputShallowWrapper = (props = {}) => {
   return shallow(<TodoInput {...props} />);
 };
 
 describe("component/element rendering", () => {
   it("TodoList component renders without error", () => {
-    const wrapper = setup();
+    const wrapper = todoInputShallowWrapper();
     const todoListContainer = findByTestAttr(wrapper, "todoInput-container");
 
     expect(todoListContainer.length).toBe(1);
