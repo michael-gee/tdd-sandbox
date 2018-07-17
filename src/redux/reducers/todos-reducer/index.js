@@ -1,3 +1,5 @@
+import { ADD_TODO } from "../../constants";
+
 export const initialState = [
   {
     id: "todo1",
@@ -11,6 +13,10 @@ export const initialState = [
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case ADD_TODO:
+      console.log(action.payload);
+      return {};
+
     default:
       return state;
   }

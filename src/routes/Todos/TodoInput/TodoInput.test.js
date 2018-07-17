@@ -45,7 +45,7 @@ describe("userInput state", () => {
     expect(initialUserInputState).toBe("");
   });
 
-  it("userInput component state should match value of input element value when changed", () => {
+  xit("userInput component state should match value of input element value when changed", () => {
     let userInput = "";
     const wrapper = todoInputShallowWrapper(null, { userInput });
     const inputElement = findByTestAttr(wrapper, "todo-input");
