@@ -47,7 +47,8 @@ describe("userInput state", () => {
 
   xit("userInput component state should match value of input element value when changed", () => {
     let userInput = "";
-    const wrapper = todoInputShallowWrapper(null, { userInput });
+    const triggerAddTodo = jest.fn();
+    const wrapper = todoInputShallowWrapper({ triggerAddTodo }, { userInput });
     const inputElement = findByTestAttr(wrapper, "todo-input");
 
     inputElement.simulate("change", { target: { value: "My new value!" } });

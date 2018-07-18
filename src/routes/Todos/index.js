@@ -11,50 +11,48 @@ import TodoList from "./TodoList";
 import "./Todos.css";
 
 export class Todos extends Component {
-  triggerAddTodo = input => {
+  triggerAddTodoInit = input => {
     input = input.trim();
 
-    console.log(this.props);
-
     if (input !== "") {
-      this.props.addTodo(input);
+      this.props.addTodoInit(input);
     }
   };
 
   render() {
-    const { todos, todosCount } = this.props;
+    const { todosObj } = this.props;
 
     return (
       <div id="todos-container" data-test="todos-container">
         <h1>Todos</h1>
-        <h2>{todosCount}</h2>
-        {/* {this.triggerAddTodo("as")} */}
-        <TodoInput data-test="todo-input-component" />
-        <TodoList todos={todos} data-test="todo-list-component" />
+        <TodoInput
+          triggerAddTodoInit={this.triggerAddTodoInit}
+          data-test="todo-input-component"
+        />
+        <TodoList todos={todosObj.todos} data-test="todo-list-component" />
       </div>
     );
   }
 }
 
 Todos.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      message: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  todosCount: PropTypes.number.isRequired
+  todosObj: PropTypes.shape({
+    globalCount: PropTypes.number.isRequired,
+    todos: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        message: PropTypes.string.isRequired
+      })
+    ).isRequired
+  }).isRequired
 };
 
-const mapStateToProps = ({ todos, todosCount }) => {
-  return {
-    todos,
-    todosCount
-  };
+const mapStateToProps = ({ todosObj }) => {
+  return { todosObj };
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ addTodo: actions.addTodo }, dispatch);
+  return bindActionCreators({ addTodoInit: actions.addTodoInit }, dispatch);
 };
 
 export default connect(
